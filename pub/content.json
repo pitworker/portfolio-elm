@@ -1,0 +1,19 @@
+{
+  "links": [
+    {
+      "description": "I did this project",
+      "url": "https://pitworker.github.io/tartanGenerator/",
+      "color": "blue"
+    }
+  ],
+  "work": [
+    {
+      "title": "Test",
+      "url": "https://pitworker.github.io/portfolio-elm/assets/test/content.md",
+      "description": "This is a test :)",
+      "id": "test",
+      "thumb": "https://pitworker.github.io/portfolio-elm/assets/test/thumb.png",
+      "color": "red"
+    }
+  ]
+}
