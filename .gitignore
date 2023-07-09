@@ -1,4 +1,13 @@
+.DS_Store
+.elm-spa
+elm-stuff
+node_modules
+dist
+out
+explorations
+.parcel-cache
+*/.parcel-cache
+pub/main.js
+yarn-error.log
+*/yarn-error.log
 *~
-.parcel-cache/*
-test/*
-dist/*

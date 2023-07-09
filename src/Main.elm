@@ -75,6 +75,8 @@ type Route
   = Home
   | BlogList (Maybe String)
   | BlogPost Int
+  | Content String
+  | ShitPage
 
 routeParser : Parser (Route -> a) a
 routeParser =
@@ -82,6 +84,8 @@ routeParser =
     [ P.map Home top
     , P.map BlogList (s "blog" <?> Q.string "search")
     , P.map BlogPost (s "blog" </> P.int)
+    , P.map Content (s "content" </> P.string)
+    , P.map ShitPage (s "shitpage.html")
     ]
 
 -- UPDATE
@@ -102,9 +106,21 @@ update msg model =
     UrlRequest request ->
       case request of
         Browser.Internal url ->
-          ( model
-          , Nav.pushUrl model.key (Url.toString url)
-          )
+          case (P.parse routeParser url) of
+            Just (Content _) ->
+              ( model
+              , Nav.load (Url.toString url)
+              )
+
+            Just ShitPage ->
+              ( model
+              , Nav.load (Url.toString url)
+              )
+
+            _ ->
+              ( model
+              , Nav.pushUrl model.key (Url.toString url)
+              )
 
         Browser.External url ->
           ( model
@@ -201,7 +217,7 @@ listWork workItem =
 getMainContent : Cmd Msg
 getMainContent =
   Http.get
-    { url = "./content.json"
+    { url = "./content/content.json"
     , expect = Http.expectJson HasMainContent contentListDecoder
     }
 

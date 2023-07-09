@@ -1,0 +1,28 @@
+{
+  "name": "portfolio",
+  "version": "0.0.1",
+  "repository": "https://github.com/pitworker/portfolio-elm",
+  "author": "Swan Carpenter",
+  "license": "GPL 3.0",
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
+    "parcel": "^2.9.3",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "parcel-reporter-static-files-copy": "^1.5.0"
+  },
+  "staticFiles": {
+    "staticPath": "pub/content",
+    "watcherGlob": "**"
+  },
+  "targets": {
+    "default": {
+      "distDir": "./out"
+    }
+  },
+  "scripts": {
+    "build-elm": "elm make ./src/Main.elm --output=\"pub/main.js\"",
+    "build": "yarn build-elm && parcel build pub/index.html",
+    "dev": "yarn build-elm && parcel serve pub/index.html pub/content/*",
+    "deploy": "gh-pages -d out"
+  }
+}
