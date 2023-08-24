@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "repository": "https://github.com/pitworker/portfolio-elm",
   "author": "Swan Carpenter",
-  "license": "GPL 3.0",
+  "license": "GPL-3.0",
   "devDependencies": {
     "gh-pages": "^5.0.0",
     "parcel": "^2.9.3",
