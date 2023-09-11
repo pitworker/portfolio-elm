@@ -55,19 +55,12 @@ type alias Model =
   , route : Maybe Route
   , mainContent : MainContent
   }
-  -- { history : List (Maybe Route)
-  -- , key : Nav.Key
-  -- , content : ContentList
-  -- }
 
 init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
   ( Model key (P.parse routeParser url) Loading
   , getMainContent
   )
-  -- ( Model [ P.parse routeParser url ] key
-  -- , Cmd.none
-  -- )
 
 -- URL PARSING
 
@@ -245,18 +238,3 @@ contentListDecoder =
           )
        )
     )
-
--- type alias LinkItem =
---   { description : String
---   , url : String
---   , color : String
---   }
-
--- type alias WorkItem =
---   { id : String
---   , title : String
---   , description : String
---   , url : String
---   , thumb : String
---   , color : String
---   }
