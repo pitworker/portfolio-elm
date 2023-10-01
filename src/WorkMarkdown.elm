@@ -1,4 +1,4 @@
-module MDRenderer
+module WorkMarkdown exposing (WorkMarkdown, render, vidView)
 
 import Html exposing (Html, div, a, h3, text)
 import Html.Attributes
@@ -7,7 +7,21 @@ import Markdown.Parser
 import Markdown.Renderer
 import Markdown.Block as Block
 
-renderer : Markdown.Renderer.Renderer (Html msg)
+type alias WorkMarkdown =
+  { content : String }
+
+render : WorkMarkdown -> Result String Html Msg
+render markdown =
+  case
+    markdown
+      |> Markdown.Parser.parse
+  of
+    Ok parsedMarkdown ->
+      Markdown.Renderer.render renderer parsedMarkdown
+    Err error ->
+      error
+
+renderer : Markdown.Renderer.Renderer (Html Msg)
 renderer =
   { heading = heading
   , paragraph = paragraph
@@ -31,7 +45,7 @@ renderer =
   , tableCell = tableCell
   , strikethrough = strikethrough
   , html = Markdown.Html.oneOf
-           [ Markdown.Html.tag "vid" (vidUrl altTxt -> vidView vidUrl altTxt)
+           [ Markdown.Html.tag "vid" (\vidUrl altTxt -> vidView vidUrl altTxt)
            |> Markdown.Html.withAttribute "url"
            |> Markdown.Html.withAttribute "alt"
            ]

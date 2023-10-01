@@ -9,6 +9,7 @@ import Url.Parser as P exposing (Parser, (</>), (<?>), s, top)
 import Url.Parser.Query as Q
 import Http
 import Json.Decode as Json
+import WorkMarkdown exposing (WorkMarkdown, render)
 
 -- MAIN
 
@@ -69,6 +70,7 @@ type Route
   | BlogList (Maybe String)
   | BlogPost Int
   | Content String
+  | Work String
   | ShitPage
 
 routeParser : Parser (Route -> a) a
@@ -78,6 +80,7 @@ routeParser =
     , P.map BlogList (s "blog" <?> Q.string "search")
     , P.map BlogPost (s "blog" </> P.int)
     , P.map Content (s "content" </> P.string)
+    , P.map Work (s "work" </> P.string)
     , P.map ShitPage (s "shitpage.html")
     ]
 
